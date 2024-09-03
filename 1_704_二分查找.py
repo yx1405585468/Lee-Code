@@ -1,16 +1,14 @@
 def search(nums, target) -> int:
-    left, right = 0, len(nums) - 1  # 定义数组的最小下标和最大下标
+    left, right = 0, len(nums) - 1  # 定义左右指针
     while left <= right:
-        left, right = 0, len(nums) - 1
-        while left <= right:
-            middle = (left + right) // 2
-            if nums[middle] < target:
-                left = middle + 1
-            elif nums[middle] > target:
-                right = middle - 1
-            else:
-                return middle
-        return -1
+        middle = (right + left) // 2  # 每个while循环都计算一次中间指针
+        if nums[middle] > target:
+            right = middle - 1
+        elif nums[middle] < target:
+            left = middle + 1
+        else:
+            return middle
+    return -1
 
 
 if __name__ == '__main__':
