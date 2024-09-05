@@ -1,4 +1,8 @@
+import time
+
+
 def intersection(nums1, nums2):
+    start_time = time.time()
     # 使用hash表，字典也是一种哈希表，同样的还有数组，set
     table = {}
 
@@ -18,14 +22,18 @@ def intersection(nums1, nums2):
     # print(res)
     res = set()
     for i in nums2:
-        if i in table:  # 这里比较的应该是i在不在key里
+        if i in table:  # 这里比较的应该是i在不在key里,遍历hash表的索引,和我上面的速度差不多
             res.add(i)
             del table[i]
     print(res)
 
+    end_time = time.time()
+    value_traversal_time = end_time - start_time
+    print(value_traversal_time)
+
 
 if __name__ == '__main__':
-    nums1 = [1, 2, 2, 2, 2, 6, 7, 8, 9]
+    nums1 = [1, 2, 2, 2, 2, 6, 7, 8, 9] * 10000000
     nums2 = [7, 8, 9, 10, 11, 12, 13, 14]
 
     intersection(nums1, nums2)
