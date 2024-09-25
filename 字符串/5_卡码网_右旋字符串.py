@@ -1,6 +1,3 @@
-from unittest.mock import right
-
-
 def solution(s, num):
     s = s[-num:] + s[:-num]
     return s
