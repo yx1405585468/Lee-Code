@@ -34,7 +34,12 @@ class Solution:
         j = 0
         for i in range(len(haystack)):
             while j > 0 and haystack[i] != needle[j]:
+                print(haystack[i] + " " + needle[j])
+                print(j)
                 j = next[j - 1]
+                print(j)
+                print("*"*100)
+
             if haystack[i] == needle[j]:
                 j += 1
             if j == len(needle):
@@ -44,4 +49,4 @@ class Solution:
 
 if __name__ == '__main__':
     so = Solution()
-    so.strStr(haystack="aabaabaaf", needle="aabaaf")
+    so.strStr(haystack="aabaabaar", needle="aabaaf")
