@@ -3,29 +3,19 @@ import time
 
 class Solution:
     def get_next(self, needle):
+
+        s = needle
         next = [0] * len(needle)
-        for j in range(1, len(needle)):
-            k = 0
-            i = 0
-            location = j  # 记录遍历的位置
-            while needle[i] == needle[j] and i < j:
-                k += 1
+        i = 0
+        next[0] = 0
+        for j in range(1, len(s)):
+            while i > 0 and s[j] != s[i]:
+                i = next[i - 1]  # 往前退一步
+            if s[j] == s[i]:
                 i += 1
-                j -= 1
-            next[location] = k
+            next[j] = i
 
         return next
-        # s = needle
-        # next = [0] * len(needle)
-        # j = 0
-        # next[0] = 0
-        # for i in range(1, len(s)):
-        #     while j > 0 and s[i] != s[j]:
-        #         j = next[j - 1]
-        #     if s[i] == s[j]:
-        #         j += 1
-        #     next[i] = j
-        # return next
 
     def strStr(self, haystack: str, needle: str) -> int:
         if len(needle) == 0:
@@ -34,12 +24,7 @@ class Solution:
         j = 0
         for i in range(len(haystack)):
             while j > 0 and haystack[i] != needle[j]:
-                print(haystack[i] + " " + needle[j])
-                print(j)
                 j = next[j - 1]
-                print(j)
-                print("*"*100)
-
             if haystack[i] == needle[j]:
                 j += 1
             if j == len(needle):
