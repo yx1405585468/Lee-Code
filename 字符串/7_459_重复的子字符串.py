@@ -17,7 +17,7 @@ class Solution:
             if s[j] == s[i]:
                 i += 1
             next[j] = i
-
+        print(next)
         return next
 
 
