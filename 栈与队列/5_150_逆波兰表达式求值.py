@@ -1,33 +1,24 @@
+from operator import add, mul
+from re import sub
 from struct import pack_into
 from typing import List
+
+
+def div(x, y):
+    return int(x / y) if x * y > 0 else -(abs(x) // abs(y))
 
 
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int | str:
         stack = []
+        op_map = {'+': add, '-': sub, '*': mul, '/': div}
         for i in tokens:
-            if i == "+":
-                temp = int(stack[-2]) + int(stack[-1])
-                stack.pop(-1)
-                stack.pop(-1)
-                stack.append(temp)
-            elif i == "-":
-                temp = int(stack[-2]) - int(stack[-1])
-                stack.pop(-1)
-                stack.pop(-1)
-                stack.append(temp)
-            elif i == "*":
-                temp = int(stack[-2]) * int(stack[-1])
-                stack.pop(-1)
-                stack.pop(-1)
-                stack.append(temp)
-            elif i == "/":
-                temp = int(stack[-2]) / int(stack[-1])
-                stack.pop(-1)
-                stack.pop(-1)
-                stack.append(temp)
+            if i not in {'+', '-', '*', '/'}:
+                stack.append(int(i))
             else:
-                stack.append(i)
+                op2 = stack.pop()
+                op1 = stack.pop()
+                stack.append(int(op_map[i](op1, op2)))
         return int(stack[0])
 
 
